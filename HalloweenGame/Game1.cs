@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HalloweenGame.LevelStuff;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,7 +9,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
+    private LevelManager _levelManager;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -19,7 +20,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-
+        _levelManager = new LevelManager();
         base.Initialize();
     }
 
@@ -36,12 +37,13 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-
+        _levelManager.Update(gameTime);
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
+        _levelManager.Draw(_spriteBatch);
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         // TODO: Add your drawing code here
