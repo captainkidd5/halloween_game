@@ -13,9 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin maps/level_1.tmx
-/copy:maps/level_1.tmx
-
 #begin sprites/EepyHead.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -100,6 +97,4 @@
 /processorParam:TextureFormat=Color
 /build:tiles/test_tile.png
 
-#begin tiles/tileset.tsx
-/copy:tiles/tileset.tsx
 
