@@ -13,9 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin maps/level_1.tmx
-/copy:maps/level_1.tmx
-
 #begin tiles/test_tile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -27,7 +24,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tiles/test_tile.png
-
-#begin tiles/tileset.tsx
-/copy:tiles/tileset.tsx
 
