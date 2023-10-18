@@ -40,8 +40,10 @@ namespace HalloweenGame.TileManagerStuff
 
         public void Draw(SpriteBatch spriteBatch, Texture2D tileSetTexture)
         {
+            if (GID == EmptyGid)
+                return;
             spriteBatch.Draw(tileSetTexture, GetPosition(), GetNormalSourceRectangle(GID),
-                Color.White, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, 0f);
+                Color.White, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .5f);
         }
 
         public Vector2 GetPosition()

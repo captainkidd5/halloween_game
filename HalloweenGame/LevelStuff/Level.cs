@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace HalloweenGame.LevelStuff
 {
@@ -19,7 +20,11 @@ namespace HalloweenGame.LevelStuff
         {
             _name = name;
         }
+        public void Initialize()
+        {
+            _tileManager = new TileManager(TileMapInitializer.CreateTileDataForMap(_name));
 
+        }
         public void Update(GameTime gameTime)
         {
             _tileManager.Update(gameTime);

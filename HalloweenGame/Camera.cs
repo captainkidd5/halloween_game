@@ -41,7 +41,7 @@ namespace HalloweenGame
 
         public static void SetToDefault()
         {
-            Zoom = 3.0f;
+            Zoom = 1.0f;
             _rotation = 0.0f;
             position = Vector2.Zero;
             LockBounds = false;

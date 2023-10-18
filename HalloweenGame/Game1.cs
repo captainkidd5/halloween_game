@@ -24,8 +24,9 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-
-        _levelManager = new LevelManager();
+        Camera.Initialize(GraphicsDevice);
+        Screen.Initialize(_graphics, Window);
+        _levelManager = new LevelManager(Content, GraphicsDevice);
 
         AnimatedSprite.Animation scareAnimation = new AnimatedSprite.Animation();
 
@@ -50,7 +51,7 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
+        Camera.Update();
         // TODO: Add your update logic here
 
         _levelManager.Update(gameTime);
@@ -62,11 +63,10 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         _levelManager.Draw(_spriteBatch);
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+      //  GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        // TODO: Add your drawing code here
 
-        // TODO: Merge this with Waiiki's code when the time is here
+  //  TODO: Merge this with Waiiki's code when the time is here
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
         _animatedSprite.Draw(_spriteBatch, new Vector2(300, 150));
         _spriteBatch.End();

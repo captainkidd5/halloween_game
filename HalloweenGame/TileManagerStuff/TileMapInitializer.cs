@@ -46,7 +46,7 @@ namespace HalloweenGame.TileManagerStuff
                     TileData tileData = new TileData();
 
                     tileData.Load(
-                        (ushort)layerNameTile.Gid,
+                        (ushort)(layerNameTile.Gid),
                         (ushort)layerNameTile.X,
                         (ushort)layerNameTile.Y,
                         (Layers)i);

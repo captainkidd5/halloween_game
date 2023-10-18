@@ -14,18 +14,22 @@ namespace HalloweenGame.LevelStuff
     {
         private Level _currentLevel;
         private readonly ContentManager _content;
-
-        public LevelManager(ContentManager content)
+        private readonly GraphicsDevice _graphics;
+        public static Texture2D TilesTexture;
+        public LevelManager(ContentManager content, GraphicsDevice graphics)
         {
             _content = content;
-
-            _currentLevel = new Level();
+            _graphics = graphics;
+            TilesTexture = _content.Load<Texture2D>("tiles/test_tile");
             TileMapInitializer.Initialize(_content);
+
+            SwitchLevel("level_1");
         }
 
         public void SwitchLevel(string name)
         {
-            _currentLevel = new Level();
+            _currentLevel = new Level(name);
+            _currentLevel.Initialize();
         }
         public void Update(GameTime gameTime)
         {
@@ -34,7 +38,10 @@ namespace HalloweenGame.LevelStuff
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            _graphics.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, Camera.Transform);
             _currentLevel.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }
