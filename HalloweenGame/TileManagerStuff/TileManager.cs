@@ -12,7 +12,7 @@ namespace HalloweenGame.TileManagerStuff
     public class TileManager
     {
 
-        public static readonly int TileSetDimension = 2;
+        public static  int TileSetDimension => LevelManager.TilesTexture.Width / Tile.S_Width;
 
         private Tile[][,] _tiles;
         private BoundsHelper _boundsHelper;
