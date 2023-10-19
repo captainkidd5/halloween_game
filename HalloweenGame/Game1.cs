@@ -13,10 +13,6 @@ public class Game1 : Game
 
     private LevelManager _levelManager;
 
-    private Player _player;
-
-    private InputService _input;
-
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -26,15 +22,13 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
-        _input = new InputService();
+        Globals.Input = new InputService();
 
         Camera.Initialize(GraphicsDevice);
         Screen.Initialize(_graphics, Window);
         _levelManager = new LevelManager(Content, GraphicsDevice);
 
-        _player = new Player(Content, new Vector2(100, 100));
+        Globals.Player = new Player(Content, new Vector2(100, 100));
 
         base.Initialize();
     }
@@ -48,23 +42,23 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        _input.Update();
+        Globals.Input.Update();
 
-        if (_input.Keyboard.IsKeyPressed(Keys.Escape))
+        if (Globals.Input.Keyboard.IsKeyPressed(Keys.Escape))
             Exit();
 
         // TODO: Update player position within the player object?
-        if (_input.Keyboard.IsKeyDown(Keys.A))
-            _player.Position = new Vector2(_player.Position.X - 10, _player.Position.Y);
+        if (Globals.Input.Keyboard.IsKeyDown(Keys.A))
+            Globals.Player.Position = new Vector2(Globals.Player.Position.X - 10, Globals.Player.Position.Y);
 
-        if (_input.Keyboard.IsKeyDown(Keys.D))
-            _player.Position = new Vector2(_player.Position.X + 10, _player.Position.Y);
+        if (Globals.Input.Keyboard.IsKeyDown(Keys.D))
+            Globals.Player.Position = new Vector2(Globals.Player.Position.X + 10, Globals.Player.Position.Y);
 
         Camera.Update();
         // TODO: Add your update logic here
 
         _levelManager.Update(gameTime);
-        _player.Update(gameTime);
+        Globals.Player.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -77,7 +71,7 @@ public class Game1 : Game
 
   //  TODO: Merge this with Waiiki's code when the time is here
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
-        _player.Draw(_spriteBatch);
+        Globals.Player.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
