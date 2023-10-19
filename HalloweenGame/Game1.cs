@@ -13,8 +13,7 @@ public class Game1 : Game
 
     private LevelManager _levelManager;
 
-    private AnimatedSprite _animatedSprite;
-    private Vector2 _animatedSpritePosition; // temp until we have an actual player/enemies
+    private Player _player;
 
     private InputService _input;
 
@@ -35,16 +34,7 @@ public class Game1 : Game
         Screen.Initialize(_graphics, Window);
         _levelManager = new LevelManager(Content, GraphicsDevice);
 
-        AnimatedSprite.Animation scareAnimation = new AnimatedSprite.Animation();
-        
-        for (int i = 0; i < 14; ++i)
-            scareAnimation.AddFrame(new AnimatedSprite.AnimationFrame(i, 500, 30, 44));
-
-        _animatedSprite = new AnimatedSprite(Content.Load<Texture2D>("sprites/ScaredSkelly"));
-        _animatedSprite.AddAnimation("scared", scareAnimation);
-        _animatedSprite.SetAnimation("scared");
-
-        _animatedSpritePosition = new Vector2(300, 150);
+        _player = new Player(Content, new Vector2(100, 100));
 
         base.Initialize();
     }
@@ -63,17 +53,18 @@ public class Game1 : Game
         if (_input.Keyboard.IsKeyPressed(Keys.Escape))
             Exit();
 
+        // TODO: Update player position within the player object?
         if (_input.Keyboard.IsKeyDown(Keys.A))
-            _animatedSpritePosition.X -= 10;
+            _player.Position = new Vector2(_player.Position.X - 10, _player.Position.Y);
 
         if (_input.Keyboard.IsKeyDown(Keys.D))
-            _animatedSpritePosition.X += 10;
+            _player.Position = new Vector2(_player.Position.X + 10, _player.Position.Y);
 
         Camera.Update();
         // TODO: Add your update logic here
 
         _levelManager.Update(gameTime);
-        _animatedSprite.Update(gameTime);
+        _player.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -86,7 +77,7 @@ public class Game1 : Game
 
   //  TODO: Merge this with Waiiki's code when the time is here
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
-        _animatedSprite.Draw(_spriteBatch, _animatedSpritePosition);
+        _player.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
