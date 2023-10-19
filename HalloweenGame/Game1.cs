@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+using HalloweenGame.LevelStuff;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,10 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+
+    private LevelManager _levelManager;
+
+    private AnimatedSprite _animatedSprite;
 
     public Game1()
     {
@@ -19,6 +24,18 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
+        Camera.Initialize(GraphicsDevice);
+        Screen.Initialize(_graphics, Window);
+        _levelManager = new LevelManager(Content, GraphicsDevice);
+
+        AnimatedSprite.Animation scareAnimation = new AnimatedSprite.Animation();
+
+        for (int i = 0; i < 14; ++i)
+            scareAnimation.AddFrame(new AnimatedSprite.AnimationFrame(i, 500, 30, 44));
+
+        _animatedSprite = new AnimatedSprite(Content.Load<Texture2D>("sprites/ScaredSkelly"));
+        _animatedSprite.AddAnimation("scared", scareAnimation);
+        _animatedSprite.SetAnimation("scared");
 
         base.Initialize();
     }
@@ -34,17 +51,25 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
+        Camera.Update();
         // TODO: Add your update logic here
+
+        _levelManager.Update(gameTime);
+        _animatedSprite.Update(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        _levelManager.Draw(_spriteBatch);
+      //  GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        // TODO: Add your drawing code here
+
+  //  TODO: Merge this with Waiiki's code when the time is here
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
+        _animatedSprite.Draw(_spriteBatch, new Vector2(300, 150));
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
