@@ -1,11 +1,11 @@
 
 namespace HalloweenGame.InputStuff;
 
-public class InputService
+public class Input
 {
     public KeyboardManager Keyboard { get; private set; }
 
-    public InputService()
+    public Input()
     {
         Keyboard = new KeyboardManager();
     }

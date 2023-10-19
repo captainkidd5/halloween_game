@@ -22,7 +22,7 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        Globals.Input = new InputService();
+        Globals.Input = new Input();
 
         Camera.Initialize(GraphicsDevice);
         Screen.Initialize(_graphics, Window);

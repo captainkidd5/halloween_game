@@ -5,6 +5,6 @@ namespace HalloweenGame;
 
 public static class Globals
 {
-    public static InputService Input { get; set; }
+    public static Input Input { get; set; }
     public static Player Player { get; set; }
 }
