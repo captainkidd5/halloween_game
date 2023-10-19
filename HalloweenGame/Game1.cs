@@ -34,7 +34,7 @@ public class Game1 : Game
         Screen.Initialize(_graphics, Window);
         _levelManager = new LevelManager(Content, GraphicsDevice);
 
-        Globals.Player = new Player(Content, new Vector2(100, 400));
+        Globals.Player = new Player(Content, new Vector2(100, 1700));
         base.Initialize();
     }
 
@@ -56,7 +56,6 @@ public class Game1 : Game
         // TODO: Add your update logic here
 
         _levelManager.Update(gameTime);
-        Globals.Player.Update(gameTime);
         PhysicsWorld.Update();
         base.Update(gameTime);
     }
@@ -67,10 +66,7 @@ public class Game1 : Game
       //  GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-  //  TODO: Merge this with Waiiki's code when the time is here
-        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
-        Globals.Player.Draw(_spriteBatch);
-        _spriteBatch.End();
+ 
 
         base.Draw(gameTime);
     }

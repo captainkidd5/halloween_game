@@ -30,6 +30,7 @@ namespace HalloweenGame.TileManagerStuff
                         tile.Load(tileData[z][i, j]);
 
                         _tiles[z][i, j] = tile;
+                        PropHelper.AssignProperties(tile);
                     }
                 }
             }
@@ -49,7 +50,7 @@ namespace HalloweenGame.TileManagerStuff
                 {
                     for(int y = _boundsHelper.StartY; y < _boundsHelper.EndY; y++)
                     {
-                       // _tiles[z][x, y].Update(gameTime);
+                        _tiles[z][x, y].Update(gameTime);
                     }
                 }
             }

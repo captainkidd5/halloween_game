@@ -21,6 +21,8 @@ namespace HalloweenGame.PhysicsStuff
         {
             base.Update(gameTime);
             Rect.Update(Entity.Position + OffSet);
+            Rect = new Rectangle2D(Entity.Position.X + OffSet.X, Entity.Position.Y + OffSet.Y, Rect.Width, Rect.Height);
+
         }
 
         protected override void ReactToCollision(Collider other)
@@ -76,9 +78,9 @@ namespace HalloweenGame.PhysicsStuff
                     }
                     else
                     {
-                        // Colliding vertically, adjust the Y position
+                        // Colliding vertically, adjust the Y position. TODO: The -5 here is wrong
                         if (this.Rect.Top < otherRect.Top)
-                            this.Entity.Position = new Vector2(this.Entity.Position.X, this.Entity.Position.Y - overlapY);
+                            this.Entity.Position = new Vector2(this.Entity.Position.X, this.Entity.Position.Y - 5);
                         else
                             this.Entity.Position = new Vector2(this.Entity.Position.X, this.Entity.Position.Y + overlapY);
                     }
@@ -99,6 +101,8 @@ namespace HalloweenGame.PhysicsStuff
             else if (other is RectangleCollider)
             {
                 bool didCollide = other.Rect.Intersects(Rect);
+                if(didCollide)
+                    Console.WriteLine("test");
                 return didCollide;
             }
 

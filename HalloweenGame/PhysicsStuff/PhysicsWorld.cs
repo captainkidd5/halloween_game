@@ -69,7 +69,7 @@ namespace HalloweenGame.PhysicsStuff
         public int StaticCount { get; private set; }
         public int ContactCount { get; private set; }
 
-        public static readonly float S_Gravity = 9.8f;
+        public static readonly float S_Gravity = 200f;
 
         public static readonly Color S_DynamicColor = Color.Blue;
         public static readonly Color S_StaticColor = Color.Yellow;
@@ -82,7 +82,7 @@ namespace HalloweenGame.PhysicsStuff
         public void Initialize()
         {
 
-            _quadTree2 = new QuadTree<Collider>(4, 16, new Rectangle2D(0, 0, 16000, 16000));
+            _quadTree2 = new QuadTree<Collider>(4, 16, new Rectangle2D(0, 0, 2400, 2400));
             _colliders = new List<Collider>();
             _collisions = new List<Collider>();
 
@@ -125,8 +125,7 @@ namespace HalloweenGame.PhysicsStuff
 
             foreach (Collider originalCollider in _colliders)
             {
-                if (originalCollider.CollisionCategories == CollisionCategory.Player)
-                    Console.WriteLine("test");
+ 
 
                 if (originalCollider.ColliderType == ColliderType.Static)
                     StaticCount++;

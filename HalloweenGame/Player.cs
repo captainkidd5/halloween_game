@@ -10,7 +10,7 @@ namespace HalloweenGame;
 public class Player : Entity
 {
     public AnimatedSprite Sprite { get; private set; }
-    public float Speed { get; set; } = 2f;
+    public float Speed { get; set; } = 6f;
     public Collider Collider { get; private set; }
     public Player(ContentManager content, Vector2 position) : base()
     {
@@ -26,7 +26,7 @@ public class Player : Entity
 
         Position = position;
 
-        Collider = new CircleCollider(ColliderType.Dynamic, Position, 4, GetCollisionCategory(), GetCollidesWith(), new Vector2(28, 80));
+        Collider = new RectangleCollider(ColliderType.Dynamic,new PhysicsStuff.Primitives.Rectangle2D(Position.X,Position.Y,16,16), GetCollisionCategory(), GetCollidesWith(), new Vector2(24,80));
         
         Collider.UserData = this;
 

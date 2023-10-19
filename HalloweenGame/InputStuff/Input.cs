@@ -28,7 +28,8 @@ public class Input
 
         if (Keyboard.IsKeyDown(Keys.D))
             velocity.X += 1;
-
+        if (Keyboard.IsKeyDown(Keys.S))
+            velocity.Y += 1;
         if (velocity != Vector2.Zero)
             velocity.Normalize();
 

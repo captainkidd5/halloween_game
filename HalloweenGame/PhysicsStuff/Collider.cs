@@ -50,7 +50,10 @@ namespace HalloweenGame.PhysicsStuff
         {
             HadCollision = false;
             Vector2 newVelocity = Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            newVelocity = new Vector2(newVelocity.X, newVelocity.Y + PhysicsWorld.S_Gravity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            if (ColliderType != ColliderType.Static)
+                newVelocity = new Vector2(newVelocity.X, newVelocity.Y + PhysicsWorld.S_Gravity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+
             Entity.Position += newVelocity;
            
 

@@ -59,7 +59,7 @@ public class AnimatedSprite
 
         spriteBatch.Draw(Texture, position, new Rectangle(columnIndex * currentFrame.Width,
             rowIndex * currentFrame.Height, currentFrame.Width, currentFrame.Height),
-            Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f);
     }
 
     public void AddAnimation(string name, Animation animation)
