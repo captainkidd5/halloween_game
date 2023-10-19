@@ -9,6 +9,7 @@ public class Player
 {
     public AnimatedSprite Sprite { get; private set; }
     public Vector2 Position { get; set; }
+    public float Speed { get; set; } = 0.25f;
 
     public Player(ContentManager content, Vector2 position)
     {
@@ -27,6 +28,8 @@ public class Player
 
     public void Update(GameTime gameTime)
     {
+        // TODO: Apply this to the existing physics system somehow
+        Position += (Globals.Input.GetVelocity() * Speed) * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         Sprite.Update(gameTime);
     }
 

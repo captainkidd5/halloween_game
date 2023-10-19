@@ -47,13 +47,6 @@ public class Game1 : Game
         if (Globals.Input.Keyboard.IsKeyPressed(Keys.Escape))
             Exit();
 
-        // TODO: Update player position within the player object?
-        if (Globals.Input.Keyboard.IsKeyDown(Keys.A))
-            Globals.Player.Position = new Vector2(Globals.Player.Position.X - 10, Globals.Player.Position.Y);
-
-        if (Globals.Input.Keyboard.IsKeyDown(Keys.D))
-            Globals.Player.Position = new Vector2(Globals.Player.Position.X + 10, Globals.Player.Position.Y);
-
         Camera.Update();
         // TODO: Add your update logic here
 
