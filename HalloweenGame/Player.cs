@@ -26,7 +26,7 @@ public class Player : Entity
 
         Position = position;
 
-        Collider = new RectangleCollider(ColliderType.Dynamic,new PhysicsStuff.Primitives.Rectangle2D(Position.X,Position.Y,16,16), GetCollisionCategory(), GetCollidesWith(), new Vector2(24,80));
+        Collider = new CircleCollider(ColliderType.Dynamic,Position,8, GetCollisionCategory(), GetCollidesWith(),new Vector2(16,80));
         
         Collider.UserData = this;
 
@@ -37,7 +37,6 @@ public class Player : Entity
                 Console.WriteLine("test");
             }
         };
-
         AddComponent(Collider);
     }
     public CollisionCategory GetCollisionCategory()
@@ -52,6 +51,8 @@ public class Player : Entity
     {
         // TODO: Apply this to the existing physics system somehow
         Vector2 velocity = (Globals.Input.GetVelocity() * Speed) * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+        if(Globals.Input.Keyboard.IsKeyReleased(Microsoft.Xna.Framework.Input.Keys.Space))
+            velocity.Y = -5000f;
         Collider.SetVelocity(velocity);
         Sprite.Update(gameTime);
         base.Update(gameTime);

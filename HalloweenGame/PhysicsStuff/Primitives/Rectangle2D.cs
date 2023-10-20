@@ -28,6 +28,7 @@ namespace HalloweenGame.PhysicsStuff.Primitives
         public float Top => Y;
         public float Bottom => Y + Height;
 
+        public Vector2 Position => new Vector2(X, Y);
 
         public void Update(Vector2 position)
         {

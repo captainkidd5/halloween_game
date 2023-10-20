@@ -49,13 +49,12 @@ namespace HalloweenGame.PhysicsStuff
         public override void Update(GameTime gameTime)
         {
             HadCollision = false;
-            Vector2 newVelocity = Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+          //  Vector2 newVelocity = Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (ColliderType != ColliderType.Static)
-                newVelocity = new Vector2(newVelocity.X, newVelocity.Y + PhysicsWorld.S_Gravity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                Velocity = new Vector2(Velocity.X, Velocity.Y + PhysicsWorld.S_Gravity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
 
-            Entity.Position += newVelocity;
-           
+
 
         }
 
