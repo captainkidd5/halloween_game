@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using HalloweenGame.PhysicsStuff;
+using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HalloweenGame.TileManagerStuff
 {
-    internal class Tile
+    internal class Tile : Entity
     {
         public static readonly int S_Width = 32;
 
@@ -25,24 +26,25 @@ namespace HalloweenGame.TileManagerStuff
         public ushort Y => _tileData.Y;
         public Layers Layer => _tileData.Layer;
 
-        public Vector2 Position { get; private set; }
         public void Load(TileData tileData)
         {
             _tileData = tileData;
+            Position = GetPosition();
 
-    
+
         }
 
-        //public void Update(GameTime gameTime)
-        //{
-        //    Sprite.Update(gameTime, Position, Vector2.One);
-        //}
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D tileSetTexture)
         {
+            base.Draw(spriteBatch);
             if (GID == EmptyGid)
                 return;
-            spriteBatch.Draw(tileSetTexture, GetPosition(), GetNormalSourceRectangle(GID),
+            spriteBatch.Draw(tileSetTexture, Position, GetNormalSourceRectangle(GID),
                 Color.White, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .5f);
         }
 

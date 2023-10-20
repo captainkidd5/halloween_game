@@ -14,8 +14,8 @@ namespace HalloweenGame.TileManagerStuff
         private static ContentManager _content;
 
         public static Texture2D S_TileSetTexture;
-    
 
+        public static Dictionary<int, TmxTilesetTile> TilePropertyDictionary;
         public static void Initialize(ContentManager content)
         {
             _content = content;
@@ -27,7 +27,7 @@ namespace HalloweenGame.TileManagerStuff
         internal static TileData[][,] CreateTileDataForMap(string levelName)
         {
             TmxMap map = new TmxMap(_content.RootDirectory + "/maps/" + levelName + ".tmx");
-
+            TilePropertyDictionary = map.Tilesets[0].Tiles;
 
             List<TmxLayer> allLayers = new List<TmxLayer>()
             {

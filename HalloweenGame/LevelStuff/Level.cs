@@ -27,11 +27,15 @@ namespace HalloweenGame.LevelStuff
         }
         public void Update(GameTime gameTime)
         {
+            Globals.Player.Update(gameTime);
+
             _tileManager.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            Globals.Player.Draw(spriteBatch);
+
             _tileManager.Draw(spriteBatch);
         }
   
