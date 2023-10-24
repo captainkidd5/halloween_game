@@ -69,7 +69,7 @@ namespace HalloweenGame.PhysicsStuff
         public int StaticCount { get; private set; }
         public int ContactCount { get; private set; }
 
-        public static readonly float S_Gravity = 200f;
+        public static readonly float S_Gravity = 20f;
 
         public static readonly Color S_DynamicColor = Color.Blue;
         public static readonly Color S_StaticColor = Color.Yellow;

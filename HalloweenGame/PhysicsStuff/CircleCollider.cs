@@ -64,13 +64,14 @@ namespace HalloweenGame.PhysicsStuff
 
                 float distanceToMove = Circle.Radius + otherCircle.Radius - distanceBetweenCircles;
                 distanceToMove = distanceToMove * -1;
-                Entity.Position = new Vector2(Entity.Position.X + (float)(System.Math.Cos(angle) * distanceToMove),
-                    Entity.Position.Y + (float)(System.Math.Sin(angle) * distanceToMove));
+                Circle.Update(new Vector2(Circle.Center.X + (float)(System.Math.Cos(angle) * distanceToMove),
+                  Circle.Center.Y + (float)(System.Math.Sin(angle) * distanceToMove)));
+
 
             }
             else if (other is RectangleCollider)
             {
-           Rectangle2D otherRect = other.Rect;
+              Primitives.Rectangle2D otherRect = other.Rect;
 
                 // Calculate the closest point on the rectangle's boundary to the circle's center
                 float closestX = Math.Max(otherRect.Left, Math.Min(Circle.Center.X, otherRect.Right));
@@ -95,7 +96,7 @@ namespace HalloweenGame.PhysicsStuff
                         Vector2 newPosition = Circle.Center + normal * Circle.Radius;
 
                         // Update the circle's position
-                        Entity.Position = newPosition;
+                        Circle.Update(newPosition);
                     }
 
                     else
@@ -109,9 +110,9 @@ namespace HalloweenGame.PhysicsStuff
 
                         // Calculate the new position of the circle to move it out of the collision
                         Vector2 newPosition = Circle.Center + normal * penetrationDepth;
+                        Circle.Update(newPosition);
 
                         // Update the circle's position
-                        Entity.Position = newPosition;
                     }
                 }
             }
@@ -119,10 +120,14 @@ namespace HalloweenGame.PhysicsStuff
         }
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            Entity.Position = Circle.Center - OffSet;
 
-            Circle.Update(Entity.Position + OffSet);
-            Rect = new Rectangle2D(Circle.Center.X - Circle.Radius,
+            base.Update(gameTime);
+            Circle.Update(Circle.Center + Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            //Entity.Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+
+            Rect = new Primitives.Rectangle2D(Circle.Center.X - Circle.Radius,
                 Circle.Center.Y - Circle.Radius, Circle.Radius * 2, Circle.Radius * 2);
 
         }
@@ -130,7 +135,7 @@ namespace HalloweenGame.PhysicsStuff
         public override void Draw(SpriteBatch spriteBatch)
         {
             //if (Settings.Data.DebugCollisionCategories.HasFlag(CollisionCategories))
-                Circle.Draw(spriteBatch, 1f, HadCollision ? PhysicsWorld.S_CollidedColor : ColorFromColliderType());
+            Circle.Draw(spriteBatch, 1f, HadCollision ? PhysicsWorld.S_CollidedColor : ColorFromColliderType());
         }
     }
 }
